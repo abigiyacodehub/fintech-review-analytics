@@ -20,14 +20,15 @@ targets these Android apps:
 
 ```text
 .
-├── .github/workflows/unittests.yml
-├── data/                  # local-only scraped and processed data
-├── notebooks/             # exploratory notebooks
-├── scripts/               # runnable scraping, cleaning, analysis scripts
-├── src/                   # importable project package
-├── tests/                 # unit tests
-├── requirements.txt
-└── README.md
+|-- .github/workflows/unittests.yml
+|-- data/                  # local-only scraped and processed data
+|-- docs/                  # reproducibility and output evidence
+|-- notebooks/             # exploratory notebooks
+|-- scripts/               # runnable scraping, cleaning, analysis scripts
+|-- src/                   # importable project package
+|-- tests/                 # unit tests
+|-- requirements.txt
+`-- README.md
 ```
 
 CSV, database, and local environment files are excluded in `.gitignore`; generated
@@ -97,6 +98,16 @@ The sentiment output includes `sentiment_label` and `sentiment_score` columns.
 With the recommended `--count 500` scrape setting, the pipeline is designed to
 cover up to 1,500 reviews across the three banks, satisfying the rubric threshold
 of at least 400 reviews when enough reviews are returned by Google Play.
+
+Validate the generated local outputs for the rubric-required columns and minimum
+Task 2 row count:
+
+```bash
+python scripts/validate_task_outputs.py \
+  --clean-input data/processed/clean_reviews.csv \
+  --sentiment-input data/processed/reviews_with_sentiment.csv \
+  --min-reviews 400
+```
 
 The thematic analysis output uses TF-IDF via scikit-learn and provides ranked
 keywords by `bank_name` and `sentiment_label`, which can be grouped into final

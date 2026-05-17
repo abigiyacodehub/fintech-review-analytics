@@ -1,4 +1,4 @@
-# Output Evidence
+# Task 1 and Task 2 Output Evidence
 
 The repository intentionally excludes generated data files with `.gitignore`.
 Run the commands below to reproduce the Task 1 and Task 2 outputs locally:
@@ -7,9 +7,13 @@ Run the commands below to reproduce the Task 1 and Task 2 outputs locally:
 python scripts/scrape_reviews.py --count 500 --output data/raw/google_play_reviews.csv
 python scripts/preprocess_reviews.py --input data/raw/google_play_reviews.csv --output data/processed/clean_reviews.csv
 python scripts/analyze_sentiment_themes.py --input data/processed/clean_reviews.csv --sentiment-output data/processed/reviews_with_sentiment.csv --themes-output data/processed/tfidf_keywords.csv
+python scripts/validate_task_outputs.py --clean-input data/processed/clean_reviews.csv --sentiment-input data/processed/reviews_with_sentiment.csv --min-reviews 400
 ```
 
-Expected `data/processed/reviews_with_sentiment.csv` columns include:
+The validation command confirms that generated local CSV outputs include the
+rubric-required fields while keeping those reproducible data files out of git.
+
+Expected `data/processed/clean_reviews.csv` Task 1 columns include:
 
 - `review_id`
 - `review_text`
@@ -17,9 +21,15 @@ Expected `data/processed/reviews_with_sentiment.csv` columns include:
 - `date`
 - `bank_name`
 - `source`
+
+Expected `data/processed/reviews_with_sentiment.csv` Task 2 columns include all
+Task 1 columns plus:
+
 - `sentiment_label`
 - `sentiment_score`
 
 The configured scrape count requests 500 reviews per bank across CBE, BOA, and
-Dashen Bank, so the documented analysis output is intended to cover at least 400
-reviews when Google Play returns sufficient review volume.
+Dashen Bank, for up to 1,500 raw reviews. The validator fails unless
+`reviews_with_sentiment.csv` contains at least 400 rows, which provides the
+documented output evidence required by the Task 2 rubric without committing CSV
+data.
