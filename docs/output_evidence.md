@@ -27,6 +27,7 @@ Task 1 columns plus:
 
 - `sentiment_label`
 - `sentiment_score`
+- `identified_theme`
 
 The configured scrape count requests 500 reviews per bank across CBE, BOA, and
 Dashen Bank, for up to 1,500 raw reviews. The validator fails unless

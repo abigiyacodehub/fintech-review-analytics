@@ -95,6 +95,7 @@ python scripts/analyze_sentiment_themes.py \
 ```
 
 The sentiment output includes `sentiment_label` and `sentiment_score` columns.
+It also includes a draft `identified_theme` column for interim theme grouping.
 With the recommended `--count 500` scrape setting, the pipeline is designed to
 cover up to 1,500 reviews across the three banks, satisfying the rubric threshold
 of at least 400 reviews when enough reviews are returned by Google Play.
@@ -115,6 +116,18 @@ themes such as login/access, transfer reliability, performance, UI/UX, and
 customer support.
 
 ## Task 4: Insights and Recommendations
+
+## Interim Due-Date Submission
+
+The PDF's interim submission asks for the GitHub `main` branch plus a short
+report covering scraping methodology, data quality, early sentiment findings,
+at least one visualization, blockers, and the final-submission plan.
+
+Submission-ready interim artifacts are in `reports/`:
+
+- `reports/interim_report.md`
+- `reports/interim_report.pdf`
+- `reports/interim_sentiment_distribution.png`
 
 After sentiment and TF-IDF outputs exist locally, generate charts and a concise
 recommendation report:

@@ -9,7 +9,7 @@ import pandas as pd
 
 
 TASK1_COLUMNS = {"review_id", "review_text", "rating", "date", "bank_name", "source"}
-TASK2_COLUMNS = TASK1_COLUMNS | {"sentiment_label", "sentiment_score"}
+TASK2_COLUMNS = TASK1_COLUMNS | {"sentiment_label", "sentiment_score", "identified_theme"}
 
 
 def parse_args() -> argparse.Namespace:

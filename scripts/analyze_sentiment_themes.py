@@ -13,6 +13,15 @@ from nltk.sentiment import SentimentIntensityAnalyzer
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 
+THEME_KEYWORDS = {
+    "Account Access": ("login", "log in", "password", "pin", "otp", "fingerprint", "authentication"),
+    "Transaction Performance": ("transfer", "transaction", "send", "payment", "bill", "airtime", "telebirr"),
+    "Reliability and Crashes": ("crash", "error", "bug", "fail", "failed", "network", "server", "slow"),
+    "UI and Usability": ("ui", "interface", "easy", "design", "update", "version", "navigation"),
+    "Customer Support": ("support", "service", "branch", "help", "call", "response", "customer"),
+}
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run sentiment and thematic analysis.")
     parser.add_argument(
@@ -53,6 +62,14 @@ def label_from_score(score: float) -> str:
     return "neutral"
 
 
+def identify_theme(review_text: object) -> str:
+    text = str(review_text).lower()
+    for theme, keywords in THEME_KEYWORDS.items():
+        if any(keyword in text for keyword in keywords):
+            return theme
+    return "General Feedback"
+
+
 def add_sentiment(df: pd.DataFrame) -> pd.DataFrame:
     if "review_text" not in df.columns:
         raise ValueError("Input data must include a review_text column.")
@@ -63,6 +80,7 @@ def add_sentiment(df: pd.DataFrame) -> pd.DataFrame:
         lambda text: analyzer.polarity_scores(str(text))["compound"]
     )
     analyzed["sentiment_label"] = analyzed["sentiment_score"].map(label_from_score)
+    analyzed["identified_theme"] = analyzed["review_text"].map(identify_theme)
     return analyzed
 
 

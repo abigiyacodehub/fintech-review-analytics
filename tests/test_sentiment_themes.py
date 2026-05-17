@@ -1,6 +1,6 @@
 import pandas as pd
 
-from scripts.analyze_sentiment_themes import extract_tfidf_keywords, label_from_score
+from scripts.analyze_sentiment_themes import extract_tfidf_keywords, identify_theme, label_from_score
 
 
 def test_label_from_score_uses_vader_thresholds():
@@ -37,3 +37,9 @@ def test_extract_tfidf_keywords_returns_grouped_theme_terms():
     )
     assert len(keywords) > 0
     assert keywords["review_count"].max() == 2
+
+
+def test_identify_theme_maps_business_keywords():
+    assert identify_theme("OTP not received during login") == "Account Access"
+    assert identify_theme("Transfer failed because the app is slow") == "Transaction Performance"
+    assert identify_theme("I like this mobile banking app") == "General Feedback"

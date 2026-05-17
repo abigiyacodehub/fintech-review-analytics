@@ -11,6 +11,8 @@ __pycache__/
 # Data artifacts should be reproducible and are intentionally not committed
 data/*
 !data/.gitkeep
+!data/**/
+!data/**/.gitkeep
 *.csv
 *.tsv
 *.db
@@ -24,5 +26,6 @@ reports/figures/
 # OS/editor noise
 .DS_Store
 Thumbs.db
-.vscode/
+.vscode/*
+!.vscode/settings.json
 .idea/

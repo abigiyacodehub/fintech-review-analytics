@@ -16,6 +16,7 @@ def test_validate_outputs_accepts_required_columns_and_minimum_rows(tmp_path):
             "source": "Google Play",
             "sentiment_label": "positive",
             "sentiment_score": 0.8,
+            "identified_theme": "Transaction Performance",
         }
         for i in range(3)
     ]
@@ -40,6 +41,7 @@ def test_validate_outputs_rejects_short_sentiment_file(tmp_path):
         "source": "Google Play",
         "sentiment_label": "negative",
         "sentiment_score": -0.6,
+        "identified_theme": "Account Access",
     }
     sentiment_df = pd.DataFrame([row])
     sentiment_df.drop(columns=["sentiment_label", "sentiment_score"]).to_csv(clean_path, index=False)
