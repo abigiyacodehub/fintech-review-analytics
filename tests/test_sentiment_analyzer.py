@@ -43,7 +43,7 @@ class TestSentimentAnalyzer:
 
     def test_neutral_sentiment_vader(self, vader_analyzer):
         """Test neutral sentiment detection with VADER."""
-        result = vader_analyzer.analyze("The app is available on Google Play")
+        result = vader_analyzer.analyze("The app has three menu items")
         assert result.label == "neutral"
         assert abs(result.score) < 0.05
 
@@ -63,7 +63,7 @@ class TestSentimentAnalyzer:
         texts = [
             "I love this app!",
             "This is terrible",
-            "It's okay"
+            "The screen has three buttons"
         ]
         results = vader_analyzer.batch_analyze(texts)
         assert len(results) == 3

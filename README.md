@@ -1,9 +1,10 @@
 # Fintech Review Analytics
 
-Customer experience analytics for Ethiopian fintech banking apps. The project
-collects Google Play reviews, cleans them, applies sentiment analysis, extracts
-keywords for thematic grouping, and generates insight artifacts for product
-recommendations.
+This project turns Google Play reviews for three Ethiopian mobile banking apps
+into a practical customer-experience readout. The workflow collects reviews,
+cleans the data, assigns sentiment, extracts recurring keywords, and packages
+the findings so a product team can see what customers appreciate and where they
+are getting stuck.
 
 ## Target Banks
 
@@ -33,8 +34,8 @@ targets these Android apps:
 `-- README.md
 ```
 
-CSV, database, and local environment files are excluded in `.gitignore`; generated
-review datasets should be kept under `data/` and should not be committed.
+CSV, database, and local environment files are excluded in `.gitignore`. The
+data can be regenerated locally, but raw review files are not committed.
 
 ## Setup
 
@@ -52,7 +53,7 @@ Collect newest available Google Play reviews for the three target banks:
 python scripts/scrape_reviews.py --count 500 --output data/raw/google_play_reviews.csv
 ```
 
-The scraper stores the rubric-required fields:
+The scraper stores the fields needed for the assignment:
 
 - `review_id`
 - `review_text`
@@ -62,10 +63,9 @@ The scraper stores the rubric-required fields:
 - `source`
 
 It also keeps useful context such as `app_id`, `user_name`, `thumbs_up`, and
-`app_version`. The date range is the newest review window returned by Google Play
-at runtime; because Google Play does not expose a stable date-range filter through
-`google-play-scraper`, the exact start date depends on the most recent reviews
-available when the command is run.
+`app_version`. The date range is the newest review window returned by Google
+Play at runtime. Because `google-play-scraper` does not expose a stable date
+filter, the exact start date can shift when the data is regenerated.
 
 Clean the raw data:
 
@@ -97,10 +97,10 @@ python scripts/analyze_sentiment_themes.py \
 ```
 
 The sentiment output includes `sentiment_label` and `sentiment_score` columns.
-It also includes a draft `identified_theme` column for interim theme grouping.
-With the recommended `--count 500` scrape setting, the pipeline is designed to
-cover up to 1,500 reviews across the three banks, satisfying the rubric threshold
-of at least 400 reviews when enough reviews are returned by Google Play.
+It also includes a draft `identified_theme` column to make early theme grouping
+visible. With the recommended `--count 500` scrape setting, the pipeline can
+cover up to 1,500 reviews across the three banks, which is comfortably above the
+400-review threshold when Google Play returns enough reviews.
 
 Validate the generated local outputs for the rubric-required columns and minimum
 Task 2 row count:

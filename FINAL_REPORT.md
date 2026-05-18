@@ -4,18 +4,21 @@
 **Project:** Fintech Review Analytics Challenge  
 **Date:** May 18, 2026  
 **Repository:** https://github.com/abigiyacodehub/fintech-review-analytics.git  
-**Status:** Complete & Submitted
+**Status:** Ready for review
 
 ---
 
 ## Executive Summary
 
-This report synthesizes a comprehensive analysis of 1,200+ Google Play Store reviews across three Ethiopian banks—Commercial Bank of Ethiopia (CBE), Bank of Abyssinia (BOA), and Dashen Bank—to identify satisfaction drivers, pain points, and actionable product recommendations.
+This report summarizes what customers are saying in Google Play reviews for
+Commercial Bank of Ethiopia (CBE), Bank of Abyssinia (BOA), and Dashen Bank.
+The goal is practical: identify what users value, where the apps are creating
+friction, and which fixes product teams should prioritize first.
 
 **Key Findings:**
-- **CBE (4.2★):** Strong performance but plagued by transaction speed issues; users demand fingerprint authentication
-- **BOA (3.4★):** Critical friction in account access and UI/UX; highest customer support burden
-- **Dashen (4.1★):** Solid core product with emerging feature gaps and feature parity expectations
+- **CBE (4.2-star baseline):** Generally strong experience, with repeated concerns around transaction speed and requests for fingerprint login.
+- **BOA (3.4-star baseline):** More visible friction in account access and UI/UX, with a heavier support burden than the other two apps.
+- **Dashen (4.1-star baseline):** Solid core experience, but users still point to feature gaps and reliability expectations.
 
 **Recommended Priority Actions:**
 1. Implement fast-track transaction processing (all banks)
@@ -55,11 +58,11 @@ reviews_data = reviews(
 
 | Metric | Target | Achieved | Status |
 |--------|--------|----------|--------|
-| Total Reviews Collected | 1,200+ | 1,250+ | ✅ |
-| Reviews per Bank | 400+ | 413+ avg | ✅ |
-| Missing Values (%) | <5% | 2.1% | ✅ |
-| Date Coverage | 6+ months | Full range | ✅ |
-| Duplicates Removed | 100% | 98.7% | ✅ |
+| Total Reviews Collected | 1,200+ | 1,250+ | Met |
+| Reviews per Bank | 400+ | 413+ avg | Met |
+| Missing Values (%) | <5% | 2.1% | Met |
+| Date Coverage | 6+ months | Full range | Met |
+| Duplicates Removed | 100% | 98.7% | Met |
 
 **Data Quality Improvements:**
 1. Removed duplicate reviews (exact text matches)
@@ -72,10 +75,10 @@ reviews_data = reviews(
 
 | Challenge | Mitigation | Status |
 |-----------|-----------|--------|
-| Rate limiting | Extended scraping over multiple sessions | ✅ Resolved |
-| Non-English reviews | Filtered to English text only | ✅ Implemented |
-| Sparse data for older periods | Used most recent 6-month window | ✅ Documented |
-| Duplicate reviews (spam) | Exact text deduplication applied | ✅ Applied |
+| Rate limiting | Extended scraping over multiple sessions | Resolved |
+| Non-English reviews | Filtered to English text only | Implemented |
+| Sparse data for older periods | Used most recent 6-month window | Documented |
+| Duplicate reviews (spam) | Exact text deduplication applied | Applied |
 
 ---
 
@@ -144,7 +147,7 @@ reviews_data = reviews(
 - "Transfers take forever, sometimes 5+ minutes" (CBE, 2-star)
 - "Money moves instantly with Dashen, love it" (Dashen, 5-star)
 
-**Business Impact:** CRITICAL - Speed is a hygiene factor; users expect sub-second confirmation.
+**Business Impact:** High. Speed is a basic expectation in mobile banking; delays quickly become a trust issue.
 
 ---
 
@@ -280,18 +283,18 @@ SELECT bank_name, COUNT(*) as review_count
 FROM reviews JOIN banks USING(bank_id)
 GROUP BY bank_name;
 
--- Result: CBE: 413, BOA: 415, Dashen: 422 ✅
+-- Result: CBE: 413, BOA: 415, Dashen: 422
 
 -- Null checks
 SELECT COUNT(*) FROM reviews WHERE review_text IS NULL OR rating IS NULL;
--- Result: 0 ✅
+-- Result: 0
 
 -- Average rating per bank
 SELECT bank_name, AVG(rating) as avg_rating 
 FROM reviews JOIN banks USING(bank_id)
 GROUP BY bank_name;
 
--- Result: CBE: 4.2, BOA: 3.4, Dashen: 4.1 ✅
+-- Result: CBE: 4.2, BOA: 3.4, Dashen: 4.1
 ```
 
 ### 4.3 Setup & Reproduction
@@ -356,7 +359,7 @@ python scripts/verify_database.py
 ### 5.2 Bank-Specific Recommendations
 
 #### **CBE (4.2★) - Consolidate & Expand**
-1. **Biometric Authentication** (CRITICAL)
+1. **Biometric Authentication** (highest priority)
    - Priority: P1
    - Timeline: Q3 2026
    - Impact: Reduce login friction, increase session time
@@ -374,13 +377,13 @@ python scripts/verify_database.py
 ---
 
 #### **BOA (3.4★) - Urgent Redesign Needed**
-1. **UX/UI Overhaul** (CRITICAL)
+1. **UX/UI Overhaul** (highest priority)
    - Priority: P0
    - Timeline: Q2-Q3 2026
    - Focus: Simplify payment flow; reduce taps from 5 to 2
    - Research: Conduct user testing sessions (10-15 users)
 
-2. **Account Access & Authentication** (CRITICAL)
+2. **Account Access & Authentication** (highest priority)
    - Priority: P1
    - Implement: Biometric + passwordless login options
    - Test: OTP delivery reliability (measure 99.9% uptime)
@@ -633,5 +636,5 @@ The findings are actionable, evidence-backed, and prioritized for maximum impact
 
 **Submission Date:** May 18, 2026  
 **Repository:** https://github.com/abigiyacodehub/fintech-review-analytics.git  
-**Status:** ✅ Complete & Ready for Review
+**Status:** Ready for review
 

@@ -2,13 +2,16 @@
 
 ## Overview
 
-This document describes the enhanced sentiment analysis implementation using Distilbert transformer model, completing Task 2 upgrades.
+This document describes the sentiment analysis implementation used in the
+project. The main pipeline stays lightweight with VADER, while the shared
+`SentimentAnalyzer` class also supports DistilBERT when the transformer
+dependencies are available.
 
 ## Model Selection
 
-### Why Distilbert?
+### Why DistilBERT?
 
-| Aspect | VADER | Distilbert |
+| Aspect | VADER | DistilBERT |
 |--------|-------|-----------|
 | Type | Rule-based | Neural network |
 | Training | Social media | SST-2 (Stanford Sentiment Tree Bank) |
@@ -18,7 +21,10 @@ This document describes the enhanced sentiment analysis implementation using Dis
 | Confidence | -1 to +1 | 0-1 per label |
 | Dependencies | NLTK | Transformers + Torch |
 
-**Decision:** Distilbert provides superior accuracy for fintech domain language, particularly for financial terminology and nuanced customer feedback.
+**Decision:** VADER is the dependable baseline for the submitted pipeline because
+it is fast and easy to reproduce. DistilBERT is available as an upgrade path for
+more nuanced review text, especially when the final analysis has enough time and
+compute budget to run a transformer model.
 
 ## Architecture
 
