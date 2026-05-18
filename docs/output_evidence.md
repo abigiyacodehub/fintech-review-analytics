@@ -13,6 +13,16 @@ python scripts/validate_task_outputs.py --clean-input data/processed/clean_revie
 The validation command confirms that generated local CSV outputs include the
 rubric-required fields while keeping those reproducible data files out of git.
 
+Latest local validation evidence for the interim submission:
+
+- Run date: 2026-05-18.
+- Raw reviews collected: 1,500.
+- Clean reviews after preprocessing: 1,500.
+- Reviews with sentiment output: 1,500.
+- Bank coverage: 500 reviews each for Commercial Bank of Ethiopia, Bank of Abyssinia, and Dashen Bank.
+- Missing `review_text` after preprocessing: 0.
+- Missing `rating` after preprocessing: 0.
+
 Expected `data/processed/clean_reviews.csv` Task 1 columns include:
 
 - `review_id`

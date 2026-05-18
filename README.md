@@ -21,7 +21,9 @@ targets these Android apps:
 ```text
 .
 |-- .github/workflows/unittests.yml
-|-- data/                  # local-only scraped and processed data
+|-- data/
+|   |-- raw/               # local-only scraped data
+|   `-- processed/         # local-only cleaned/analyzed data
 |-- docs/                  # reproducibility and output evidence
 |-- notebooks/             # exploratory notebooks
 |-- scripts/               # runnable scraping, cleaning, analysis scripts
@@ -115,8 +117,6 @@ keywords by `bank_name` and `sentiment_label`, which can be grouped into final
 themes such as login/access, transfer reliability, performance, UI/UX, and
 customer support.
 
-## Task 4: Insights and Recommendations
-
 ## Interim Due-Date Submission
 
 The PDF's interim submission asks for the GitHub `main` branch plus a short
@@ -128,6 +128,8 @@ Submission-ready interim artifacts are in `reports/`:
 - `reports/interim_report.md`
 - `reports/interim_report.pdf`
 - `reports/interim_sentiment_distribution.png`
+
+## Task 4: Insights and Recommendations
 
 After sentiment and TF-IDF outputs exist locally, generate charts and a concise
 recommendation report:
