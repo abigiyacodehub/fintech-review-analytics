@@ -6,8 +6,6 @@ import logging
 from enum import Enum
 from typing import NamedTuple
 
-import numpy as np
-
 try:
     from transformers import pipeline
     TRANSFORMERS_AVAILABLE = True
